@@ -9,68 +9,68 @@ import (
 	"time"
 )
 
-// Create a new type of dek
-// Which is a slice of strings
+// Membuat Tipe Dek
+// Dek adalah kumpulan text/string dalam array/larik
 
 type dek []string
 
-func (d dek) print() {
-	for i, card := range d {
-		fmt.Println(i, card)
+func (d dek) cetak() {
+	for i, kartu := range d {
+		fmt.Println(i, kartu)
 	}
 }
 
-func (d dek) toString() string {
+func (d dek) jadiHuruf() string {
 	return strings.Join(d, ",")
 }
 
-func (d dek) saveToFile(filename string) error {
-	error := ioutil.WriteFile(filename, []byte(d.toString()), 0666)
+func (d dek) simpanKeFile(namafile string) error {
+	error := ioutil.WriteFile(namafile, []byte(d.jadiHuruf()), 0666)
 	return error
 }
 
-func deal(d dek, handSize int) (dek, dek) {
-	return d[:handSize], d[handSize:]
+func bagiKartu(d dek, jumlahKartu int) (dek, dek) {
+	return d[:jumlahKartu], d[jumlahKartu:]
 }
 
-func newDect() dek {
-	cardSuits := []string{"Spades", "Diamonds", "Hearts", "Club"}
-	cardValues := []string{"Ace", "Two", "Three", "Four"}
-	cards := dek{}
+func dekbaru() dek {
+	jenisKartu := []string{"Spades", "Diamonds", "Hearts", "Club"}
+	angkaKartu := []string{"Ace", "Two", "Three", "Four"}
+	kartuKartu := dek{}
 
-	for _, suit := range cardSuits {
-		for _, value := range cardValues {
-			cards = append(cards, value+` `+suit)
+	for _, jenis := range jenisKartu {
+		for _, angka := range angkaKartu {
+			kartuKartu = append(kartuKartu, angka+` `+jenis)
 		}
 	}
 
-	return cards
+	return kartuKartu
 }
 
-func newDectFromFile(filename string) dek {
-	bs, err := ioutil.ReadFile(filename)
+func dakBaruDariFile(namafile string) dek {
+	bs, err := ioutil.ReadFile(namafile)
 	if err != nil {
 		fmt.Println("Error: ", err)
 		os.Exit(1)
 	}
-	oneStringDeck := string(bs)
-	dekFromFile := strings.Split(oneStringDeck, ",")
-	cards := dek(dekFromFile)
-	return cards
+	dekDalamSatuString := string(bs)
+	dekBerbentukArrayString := strings.Split(dekDalamSatuString, ",")
+	kartuKartu := dek(dekBerbentukArrayString)
+	return kartuKartu
 }
 
-// Notes, to make rando generate new random number
-// we need to make sure generator always use new seed/or source of random generator
-// random generator work in 3 phase, create seed, create source base on seed, create generator base on source
+// Catatan, untuk menghasilkan data yang selalu acak
+// kita perlu membuat randomGenerator yang menggunakan sumber/sumberdata yang berbeda setiap saat
+// terdapat tiga tahap yaitu : - Membuat Bibit/ Angka untuk diolah, - Membuat Source/ Sumber dari bibit, - Membuat Generator dari sumber
 
-func (d dek) suffle() dek {
-	seed := time.Now().UnixNano()  // Seed
-	source := rand.NewSource(seed) // Create Random Source
-	r := rand.New(source)
+func (d dek) acak() dek {
+	bibit := time.Now().UnixNano()  // Seed
+	sumber := rand.NewSource(bibit) // Create Random Source
+	r := rand.New(sumber)
 
 	for i := range d {
-		newPosition := r.Intn(len(d) - 1)
-		d[i], d[newPosition] = d[newPosition], d[i]
+		posisiBaru := r.Intn(len(d) - 1)
+		d[i], d[posisiBaru] = d[posisiBaru], d[i]
 	}
 	return d
 }
