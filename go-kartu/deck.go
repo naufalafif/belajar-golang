@@ -9,34 +9,34 @@ import (
 	"time"
 )
 
-// Create a new type of deck
+// Create a new type of dek
 // Which is a slice of strings
 
-type deck []string
+type dek []string
 
-func (d deck) print() {
+func (d dek) print() {
 	for i, card := range d {
 		fmt.Println(i, card)
 	}
 }
 
-func (d deck) toString() string {
+func (d dek) toString() string {
 	return strings.Join(d, ",")
 }
 
-func (d deck) saveToFile(filename string) error {
+func (d dek) saveToFile(filename string) error {
 	error := ioutil.WriteFile(filename, []byte(d.toString()), 0666)
 	return error
 }
 
-func deal(d deck, handSize int) (deck, deck) {
+func deal(d dek, handSize int) (dek, dek) {
 	return d[:handSize], d[handSize:]
 }
 
-func newDect() deck {
+func newDect() dek {
 	cardSuits := []string{"Spades", "Diamonds", "Hearts", "Club"}
 	cardValues := []string{"Ace", "Two", "Three", "Four"}
-	cards := deck{}
+	cards := dek{}
 
 	for _, suit := range cardSuits {
 		for _, value := range cardValues {
@@ -47,15 +47,15 @@ func newDect() deck {
 	return cards
 }
 
-func newDectFromFile(filename string) deck {
+func newDectFromFile(filename string) dek {
 	bs, err := ioutil.ReadFile(filename)
 	if err != nil {
 		fmt.Println("Error: ", err)
 		os.Exit(1)
 	}
 	oneStringDeck := string(bs)
-	deckFromFile := strings.Split(oneStringDeck, ",")
-	cards := deck(deckFromFile)
+	dekFromFile := strings.Split(oneStringDeck, ",")
+	cards := dek(dekFromFile)
 	return cards
 }
 
@@ -63,7 +63,7 @@ func newDectFromFile(filename string) deck {
 // we need to make sure generator always use new seed/or source of random generator
 // random generator work in 3 phase, create seed, create source base on seed, create generator base on source
 
-func (d deck) suffle() deck {
+func (d dek) suffle() dek {
 	seed := time.Now().UnixNano()  // Seed
 	source := rand.NewSource(seed) // Create Random Source
 	r := rand.New(source)
