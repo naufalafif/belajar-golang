@@ -8,5 +8,7 @@ func main() {
 	contohMap["nama"] = "naufal"
 	contohMap["alamat"] = "jogja"
 
+	delete(contohMap, "alamat")
+
 	fmt.Println(contohMap)
 }
