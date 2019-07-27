@@ -1,0 +1,65 @@
+# create channel <-- coccurency
+  c := make(chan string)
+  go count(c)
+  msg := <- c
+  fmt.Println(msg)
+
+  func count(c chan string) {
+    for i:=1; i <= 5; i++ {
+      c <- "sheep"
+      time.sleep(time.Millisecond * 500)
+    } 
+  } 
+
+# go routine <-- coccurency
+  main() {
+    go count()
+    countTwo()
+  }
+
+  func countTwo() {
+    for {
+      fmt.Println('fish')
+    }
+  }
+
+  func count() {
+    for {
+      fmt.Println('sheep')
+    }
+  }
+
+# infinity loop 
+  for {
+    if condition {
+      break
+    }
+  }
+
+# sleep 
+  time.Sleep(milisecond)
+# console input
+  fmt.Scanln()
+# wait <-- use to wait for all process async/coccurency to finish
+  main () {
+    var wg sync.waitGroup
+    wg.add(1)
+    go func() {
+      count()
+      wg.Done()
+    }()
+    wg.Dait()
+  }
+
+# select <-- execute channel coccurenly
+  chan1....
+  chan2...
+  go ...
+  go ...
+
+  select {
+    case msg1 := <- chan1:
+      fmt.Println(msg1)
+    case msg2 := <- chan2:
+      fmt.Println(msg2)
+  }
