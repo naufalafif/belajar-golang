@@ -48,7 +48,7 @@
       count()
       wg.Done()
     }()
-    wg.Dait()
+    wg.Wait()
   }
 
 # select <-- execute channel coccurenly
@@ -63,3 +63,25 @@
     case msg2 := <- chan2:
       fmt.Println(msg2)
   }
+# pointer
+  main() {
+    data := 1
+    fmt.Println(data) // 2
+
+    dataSlice := []string{"naufal","witri"}
+  }
+
+  func updateData(data *int){
+    *data = 2
+    // if using struct u should use bracket, (*data).name = .....
+  }
+
+  func updateDataSlice (data []string) {
+    data[0] = "dede"
+    // we dont use pointer cause, slice &s ome other type are work differently. see variable-type.png
+    // Go is pass by value, but when we use slice, it actualy make new value & refenc it value to real slices., so u dont have to use pointer to refenc it.
+  }
+
+  // NOTES
+  // value type need pointer : int, float, string, bool, struct
+  // reference type dont need pointer :  slices, map, channel, pointer, function
