@@ -85,3 +85,5 @@
   // NOTES
   // value type need pointer : int, float, string, bool, struct
   // reference type dont need pointer :  slices, map, channel, pointer, function
+# Deklarasi
+  all decklaration with no assing, will be filled with it's zero values. 
