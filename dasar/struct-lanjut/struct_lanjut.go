@@ -24,6 +24,17 @@ func main() {
 		},
 	}
 
-	fmt.Println(budi)
+	// Pointer
+	budi.ubahNamaDepan("Budi Baru")
 
+	budi.cetak()
+
+}
+
+func (o *orang) ubahNamaDepan(namaDepan string) {
+	(*o).namaDepan = namaDepan
+}
+
+func (o orang) cetak() {
+	fmt.Printf("%+v", o)
 }
