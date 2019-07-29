@@ -85,5 +85,11 @@
   // NOTES
   // value type need pointer : int, float, string, bool, struct
   // reference type dont need pointer :  slices, map, channel, pointer, function
-# Deklarasi
+# Decklaration
   all decklaration with no assing, will be filled with it's zero values. 
+# Interface
+  u cant define value on interface,
+  interface used to define function which can handle multiple type with same function/ behavior
+  interface in go are different with other language like java, c++ execute
+  interface is implicit, u dont have to define interface on other type. it's automaticly become interface child. u dont have to write implement etc
+  interface used to help user manage type
