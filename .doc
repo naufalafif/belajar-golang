@@ -93,3 +93,6 @@
   interface in go are different with other language like java, c++ execute
   interface is implicit, u dont have to define interface on other type. it's automaticly become interface child. u dont have to write implement etc
   interface used to help user manage type
+
+# channel
+  channel is the way go routine communicate (the only way). channel make go routine able to comminicate each other
